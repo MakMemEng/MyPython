@@ -1,0 +1,535 @@
+[Shift]キー+[Enter]キー
+実行
+
+
+セル内の改行は[Enter]キー
+
+Jupyter Notebookはprint()関数を書かなくても、
+セルの一番最後に書いた変数の値を表示
+
+
+
+
+
+実行順
+
+上から順に全てのセルを実行したい時は、
+KernelメニューのRestart & Run Allをクリック
+
+
+
+
+
+モード
+2つのモードがあり、ショートカットキーで使えるコマンドが
+異なっていますので、ご注意ください。
+
+
+コマンドモード：選択されたセルが青い四角で囲まれます。
+	[Esc]キーを押すと、このモードになります。
+エディットモード：選択されたセルが緑の四角で囲まれます。
+	[Enter]キーを押すと、このモードになります。
+	セルの入力は、エディットモードでやります。
+	ショートカットキーは、コマンドモードで[h]キーを押すと
+	確認できます。
+
+
+
+%run 1.ipynbという記述が出てきます。
+これは、前のクエスチョンのNotebookを取り込んで実行する
+
+
+
+import random
+​
+random.seed(1)
+random_result = random.choice(['A', 'B', 'C'])
+random_result
+
+'A'
+
+random_result2
+random_result2 = random.choice(['D', 'F', 'G'])
+random_result2
+
+'G'
+
+
+
+
+
+関数の利用
+
+
+#関数add_oneを定義します
+def add_one(x):
+    y = x + 1
+    return y
+​
+#実行
+result = add_one(1)
+result
+2
+_
+result_2 = add_one(2)
+result_2
+3
+
+
+
+関数を別のセルから呼び出すには、
+関数を定義しているセルを先に実行する必要があります。
+
+
+
+
+「#」で始めると見出しに、「-」で始めると箇条書きになります
+（記号は半角で入力して、直後にスペースをいれてください）。
+[Shift]キー+[Enter]キー で実行すると、変換されます。
+セルをダブルクリックすると、入力モードになります。
+
+
+
+
+・保存（s）
+・直下に新規のセルを増やす（b）
+・セルの切り取り（x）
+・セルのコピー（c）
+・セルのペースト（v）
+
+
+
+
+
+コラム
+
+
+
+ノートのファイル名の変更
+メニューの上の「Jupyter」という文字の右に、ノートのファイル名が表示されています。
+このファイル名をクリックすると、変更画面が表示されます。PyQでは、ノートのファイル名は、変更しないでください（Cancelを押してください）。
+
+
+新しいセルの追加
+選択セルの上に追加：[Insert]メニューの[Insert Cell Above]サブメニュー、またはコマンドモードでaキー
+選択セルの下に追加：[Insert]メニューの[Insert Cell Below]サブメニュー、またはコマンドモードでbキー
+
+
+数式
+下記の2種類の数式が記述できます。
+
+$数式$：インライン数式（文中に埋め込まれます）
+$$数式$$：ディスプレイ数式（別の行になります）
+それぞれ、下記のようになります。
+
+### インライン数式の例
+
+数式$e^{i \pi} = -1$は、オイラーの等式と呼ばれます。
+
+### ディスプレイ数式の例
+
+下記の数式は、オイラーの等式と呼ばれます。
+$$e^{i \pi} = -1$$
+
+
+
+
+
+グラフを表示
+
+
+%matplotlib inline
+import matplotlib.pyplot as plt
+
+#折れ線グラフを表示
+plt.title('Test Graph')
+plt.plot([1,3,2,4]);
+
+
+
+
+
+マジックコマンドで時間計測
+
+
+
+
+# グラフのインライン描画指定
+%matplotlib inline
+
+# 変数一覧（Jupyterでは予めいくつか設定されていることもあります）
+a = 10
+
+
+
+
+
+
+
+%や%%で始まるコードをマジックコマンドといいます。
+
+・%コマンド：ラインマジックコマンドといいます。
+	1行からなるコマンドです。
+・%%コマンド：セルマジックコマンドといいます。
+	1セルからなるコマンドです。
+
+
+
+%matplotlib inline
+グラフ（matplotlib）のインライン描画指定をします。
+引数無しで%matplotlibとすると、別画面への描画指定になりますが、PyQでは無効です。
+
+
+
+%quickref
+簡易ヘルプを画面下部に表示します。画面下部の表示は、Escキーまたは、×ボタンで消せます。
+
+# 簡易ヘルプ
+%quickref
+# Escキーで画面下部の表示を消せます
+
+
+
+
+%whos
+変数の一覧を表示します。何も変数を作成していなくても、予めいくつか設定されていることもあります。
+
+a = 10
+%whos
+
+Variable   Type    Data/Info
+----------------------------
+a          int     10
+
+
+
+
+
+
+時間計測
+下記のマジックコマンドで、コードの実行時間を計測できます。非常に便利なので、是非、覚えましょう。
+
+	マジックコマンド	対象	実行回数
+	%time	行	1回
+	%%time	セル	1回
+	%timeit	行	複数回
+	%%timeit	セル	複数回
+
+
+%timeitと%%timeitは、「M回実行したときの平均時間の値」をN回繰り返したときのN個から、平均と標準偏差を出力します。
+デフォルトでは、1回あたりの実行時間に応じて実行回数が変わります。
+-n数字オプションで実行回数（M）を、-r数字オプションで個数（N）を指定できます。
+
+%timeitや%%timeitで実行しても、変数は定義されないので注意しましょう。
+
+
+
+# 1行を1回、時間計測
+%time a = 10
+
+CPU times: user 2 µs, sys: 0 ns, total: 2 µs
+Wall time: 4.29 µs
+
+%%time
+# セルを1回、時間計測
+a = 10
+b = a + 1
+
+CPU times: user 2 µs, sys: 1 µs, total: 3 µs
+Wall time: 4.05 µs
+
+# 1行を複数回、時間計測
+%timeit -n10 -r3 c = 10
+# 変数cは定義されていません
+try:
+    print(c)
+except NameError as e:
+    print(e)
+
+27.3 ns ± 9.09 ns per loop (mean ± std. dev. of 3 runs, 10 loops each)
+name 'c' is not defined
+
+%%timeit -n10 -r3
+# セルを複数回、時間計測
+a = 10
+b = a + 1
+
+49.9 ns ± 9.25 ns per loop (mean ± std. dev. of 3 runs, 10 loops each)
+
+
+
+
+
+
+
+コラム
+%configで各種設定できます。たとえば、解像度の設定ができます。
+
+・%config InlineBackend.figure_formats = {'png', 'retina'}：
+	グラフ描画の高解像度設定
+・%config InlineBackend.figure_formats = {'png'}：
+	グラフ描画の低解像度設定
+
+
+
+
+
+マジックコマンドで変数保存
+
+
+
+# 変数aをJupyterのDBに保存
+a = 20
+%store a
+
+Stored 'a' (int)
+
+# 保存されている変数の一覧
+%store
+
+Stored variables and their in-db values:
+a             -> 20
+
+del a  # 変数aを削除
+try:
+    print(a)  # 定義されていないのでエラー
+except NameError as e:
+    print(e)
+
+name 'a' is not defined
+
+# aを戻す
+%store -r
+print(a)
+
+20
+
+!ls ~/.ipython/profile_default/db/autorestore
+
+a
+
+# DBの変数を全て削除
+%store -z
+# 保存されている変数の一覧は空に
+%store
+
+Stored variables and their in-db values:
+
+!ls ~/.ipython/profile_default/db/autorestore
+
+# pickle形式で保存
+import pickle
+a = 30
+with open('a', 'wb') as fp:
+    pickle.dump(a, fp)
+
+!ls a
+
+a
+
+# pickle形式から読込
+del a
+with open('a', 'rb') as fp:
+    a = pickle.load(fp)
+a
+
+30
+
+!rm a
+
+
+
+
+%storeマジックコマンドで、変数をJupyterのDBに保存したり、読み込んだりできます。
+
+マジックコマンド	説明
+%store 変数	変数をDBに保存
+%store -d 変数	変数をDBから削除
+%store	変数の一覧表示
+%store -r	保存されている全ての変数の読込
+%store -z	保存されている全ての変数の削除
+
+JupyterのDBのデータは、~/.ipython/profile_default/db/autorestoreフォルダに変数名のファイルで保存されます。中身はpickle形式です。
+pickle形式は、pickleライブラリーでサポートされているPython固有のバイナリー形式です。高速に読み書きできます。
+
+
+
+コードの補足
+
+Pythonの実行環境と「JupyterのDB」は別々に管理されます。
+
+コードのようにdel aとすることで、Pythonの実行環境から変数aを削除します。これにより、変数aが存在しなくなります。ただし、JupyterのDBは無関係なので、%store -rとすることで変数aを再度、利用できるようになります。
+
+
+open関数の'wb'モードと'rb'モード
+データを単なる数字の連続データとみなしたとき、そのデータのことを、バイナリー形式のデータといいます。コンピューターの内部ではデータを0と1を用いているため、バイナリー（binary）という言い方をします。
+
+open関数の第2引数の'wb'は、バイナリーの書き込みモードを指定しています。
+open関数の第2引数の'rb'は、バイナリーの読み込みモードを指定しています。
+
+pickleを使う場合は、バイナリーの指定が必要です。
+
+クエスト「入力と出力」も参照ください。
+
+
+
+システムコマンド
+
+!コマンドでOSのコマンドを実行できます。
+たとえば、!ls ~/.ipython/profile_default/db/autorestoreとすると、JupyterのDBに保存されている変数一覧を表示します。
+なお、lsは、Linuxの「ファイルの一覧を表示する」コマンドです。
+
+
+
+pickle形式を使った保存と読込
+
+pickle.dump：オブジェクトをファイルに保存
+pickle.load：ファイルからオブジェクトを読込
+参考：pickle — Python オブジェクトの直列化
+
+
+コラム
+何らかのエラーが出た場合、マジックコマンド%debugでデバッグ実行できます。使いやすいとはいえませんが、変数の値を確認できて便利です。qコマンドで終了しないと、他のセルで実行できなくなるので注意が必要です。下表のコマンドのh(elp)は、helpとhのどちらも使えることを表しています。
+
+
+コマンド	説明
+h(elp)	ヘルプの表示。コマンドを引数にすると、コマンドのヘルプ。
+l(ist) 行番号	指定行の周辺の表示。行番号を省略すると現在の行。
+b(reak) 対象	対象の行や関数に来たら停止。
+c(ontinue)	実行を続ける。
+n(ext)	現在行だけ実行する。
+p(rint) 変数	変数の値の表示。
+s(tep)	現在行の関数の中に入る。
+u(p)	呼出し階層を上がる。
+d(own)	呼出し階層を下がる。
+w(here)	呼出し履歴の表示。
+q(uit)	デバッガを終了する。
+※ 上記のコマンドは、%debugを実行した後で利用できます。
+
+
+
+
+%matplotlib inline
+
+
+最初に「%matplotlib inline」を入れることによって、
+Notebook内に描画されるようになります。
+
+plt.showを呼ぶと描画を行います。
+ただし、inline指定の場合、plt.showを省略できます。
+
+
+
+
+%matplotlib inline
+import matplotlib.pyplot as plt
+plt.style.use('seaborn-darkgrid')
+
+
+# MATLABスタイル
+plt.plot([2, 1, 3])
+plt.plot([1, 3, 2])
+
+# オブジェクト指向スタイル
+fig, ax = plt.subplots()
+ax.plot([2, 1, 3])
+ax.plot([1, 3, 2]);
+
+
+・MATLABスタイル：
+
+	matplotlib.pyplotモジュールを通して描画します。
+	描画対象が固定になります。
+
+・オブジェクト指向スタイル：
+
+	描画オブジェクト（fig）とサブプロット（ax）を作成して、
+	サブプロットを通して描画します。
+
+
+
+# サンプル1
+fig, ax = plt.subplots()
+ax.plot([2, 1, 3])
+ax.plot([1, 3, 2]);
+
+
+・fig, ax = plt.subplots()で、描画オブジェクト（fig）と
+　サブプロット（ax）を作成しています。
+	・描画オブジェクトは、描画対象になります。
+	・サブプロットは、1つの描画オブジェクトに
+	　複数作成できる配置場所です。この例では1つです。
+
+・plt.plotの代わりにax.plotで描画します。
+　すなわち、サブプロットに対しグラフの描画の指示をします。
+　1つのaxに対し2回plotを呼んでいるので、1枚のグラフに
+　2本の折れ線グラフが描画されます。
+
+
+
+# サンプル2
+fig, axes = plt.subplots(2)
+axes[0].plot([2, 1, 3])
+axes[1].plot([1, 3, 2]);
+
+
+サンプル1とのコードの違いは、以下の2つです。
+これにより縦に並んだ1つのグラフを描画します。
+
+・fig, axes = plt.subplots(2)で、描画オブジェクト（fig）と
+2つのサブプロットの多次元配列（axes）※を作成しています。
+
+・axの代わりにaxes[0]やaxes[1]という別々のサブプロットを使っています。
+
+
+# サンプル3
+fig, axes = plt.subplots(1, 2)
+axes[0].plot([2, 1, 3])
+axes[1].plot([1, 3, 2]);
+
+
+plt.subplots(n, m)とすることで、n行m列のグリッド状のサブプロットを作成できます。nやmのデフォルト値は1です。
+plt.subplots(1, 2)により、1行×2列の2つのサブプロットが作成されます。
+これにより横に並んだグラフが描画されます。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

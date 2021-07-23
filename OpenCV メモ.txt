@@ -1,0 +1,31 @@
+	画像を反転させて表示
+
+# 回転変換行列の算出
+rot_matrix = cv2.getRotationMatrix2D(center, angle, scale)
+
+# アフィン変換
+rot_img = cv2.warpAffine(img, rot_matrix, size, flags=cv2.INTER_CUBIC)
+
+元の画像を反転
+→画像の水増しでよく使われる
+　→AIの読み込むデータ量(判断材料)が多ければ多いほど精確
+
+白黒画像で表示
+cv2.imread(filename, 0)
+cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+指定の色で表示
+cv2.imread(filename, 1)
+cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+画像のサイズ変更
+→画像系のAIの入力サイズは一定であるため
+cv2.resize(img,(size,size))
+
+2枚の画像を重ねる(合成)
+cv2.addWeighted(img1, 1の割合, img2, 2の割合, γ)
+
+α: 1つ目の画像の重なりの重み
+β: 2つ目の画像の重なりの重み
+γ: 2つの画像に加算される重み(全体の明度)
+

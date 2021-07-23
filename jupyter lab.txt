@@ -1,0 +1,3 @@
+C:\Users\YATANI MAKIO\Desktop\Programing\Python
+
+jupyter lab
